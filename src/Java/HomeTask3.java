@@ -1,12 +1,17 @@
 import com.microsoft.playwright.*;
+import exceptions.InvalidUserDataException;
 
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-//code gen:
-//mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="codegen https://citilink.ru"
+
 
 public class HomeTask3 {
+    private static final int ok = 200;
+
     public static void main(String[] args) throws InterruptedException {
         validDataAuthTest();
     }
@@ -20,13 +25,39 @@ public class HomeTask3 {
 
             AuthorizationPage.getLoginMenuButton(page).click();
             AuthorizationPage.getEmailOrPhoneField(page).fill(System.getenv("PhoneNumber"));
-            AuthorizationPage.getPasswordField(page).fill(System.getenv("Password") + "1");
-//          Thread.sleep(3000);
+            AuthorizationPage.getPasswordField(page).fill(System.getenv("Password"));
             AuthorizationPage.getEnterButton(page).click();
-
             page.navigate(AuthorizationPage.getPageUrl() + "/profile/club");
             //assertThat(page.locator("span").filter(new Locator.FilterOptions().setHasText(System.getenv("UserName"))));
             Thread.sleep(5000);
+
+
+
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Content-Type", "application/json");
+            APIRequestContext apiRequestContext = playwright.request().newContext(new APIRequest.NewContextOptions()
+                    .setBaseURL(AuthorizationPage.getPageUrl())
+                    .setExtraHTTPHeaders(headers));
+            int responseCode = apiRequestContext.get("/profile").status();
+            try {
+                if (responseCode != ok) {
+                    throw new InvalidUserDataException();
+                }
+            } catch (InvalidUserDataException e) {
+                e.printStackTrace();
+            }
+            finally {
+                apiRequestContext.dispose();
+            }
+
+
+
+
+
         }
     }
 }
+
+//code gen:
+//mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="codegen https://citilink.ru"
+// сделать все тоже самое с контекстом

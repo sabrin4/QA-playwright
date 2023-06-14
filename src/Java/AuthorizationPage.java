@@ -2,7 +2,7 @@ import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 
 public class AuthorizationPage {
-    private static final String pageUrl = "http://citilink.ru";
+    private static final String pageUrl = "https://www.citilink.ru";
 
     public static String getPageUrl() {
         return pageUrl;

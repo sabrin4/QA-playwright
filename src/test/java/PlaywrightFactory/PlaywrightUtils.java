@@ -7,9 +7,9 @@ import com.microsoft.playwright.Playwright;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class PlaywrightUtils {
-    public static Playwright playwright = Playwright.create();
-    public static Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-    public static Page page = browser.newPage();
+    private final static Playwright playwright = Playwright.create();
+    private final static Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+    private final static Page page = browser.newPage();
 
     public static void openBaseUrl() {
         page.navigate("https://www.citilink.ru");

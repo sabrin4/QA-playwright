@@ -32,6 +32,20 @@
             <artifactId>qase-api</artifactId>
             <version>3.0.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>io.qase</groupId>
+            <artifactId>qase-testng</artifactId>
+            <version>3.0.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.8.0</version>
+            <scope>src</scope>
+        </dependency>
+
     </dependencies>
 
 

@@ -21,3 +21,6 @@ build/
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+### Class files ###
+.Demo

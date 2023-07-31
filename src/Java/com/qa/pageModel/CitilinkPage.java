@@ -11,6 +11,7 @@ public class CitilinkPage {
     public final Locator loginConfirmButton;
     public final Locator userProfileButton;
     public final Locator userLogoutButton;
+    public final Locator enterMenuCloseButton;
 
     public CitilinkPage(Page page) {
         enterMenuButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Войти"));
@@ -20,5 +21,6 @@ public class CitilinkPage {
                 .getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Войти"));
         userProfileButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(System.getenv("UserName")));
         userLogoutButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Выйти"));
+        enterMenuCloseButton = page.locator(".e1nu7pom0");
     }
 }
